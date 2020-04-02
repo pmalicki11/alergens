@@ -1,4 +1,4 @@
 <?php $this->setSiteTitle('Products');?>
 <?php $this->start('body');?>
-<p>Products Page</p>
+<p>Add Product Page</p>
 <?php $this->end();?>

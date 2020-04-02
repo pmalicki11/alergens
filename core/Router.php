@@ -6,13 +6,16 @@
       $controller = 'HomeController';
       $action = 'indexAction';
       $params = [];
+
       if(isset($url[0]) && $url[0] != '') {
         $controller = ucwords($url[0]) . 'Controller';
       }
+
       array_shift($url);
       if(isset($url[0]) && $url[0] != '') {
         $action = $url[0] . 'Action';
       }
+
       array_shift($url);
       $params = $url;
 

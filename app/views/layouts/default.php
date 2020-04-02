@@ -8,10 +8,10 @@
   <body>
     <h1>Food Registration</h1>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">My products</a></li>
-      <li><a href="#">Add products</a></li>
-      <li><a href="#">Components</a></li>
+      <li><a href="<?=PROOT."home/index";?>">Home</a></li>
+      <li><a href="<?=PROOT."products/index";?>">My products</a></li>
+      <li><a href="<?=PROOT."products/add";?>">Add products</a></li>
+      <li><a href="<?=PROOT."components/index";?>">Components</a></li>
     </ul>
     <?=$this->content('body');?>
   </body>
