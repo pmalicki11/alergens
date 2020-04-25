@@ -19,10 +19,19 @@
 
 
     public function addAction() {
-      if(isset($_POST['name']) && strlen($_POST['name']) > 0) {
+      if(isset($_POST['name'])) {
+        $this->_view->errors = [];
         $this->_model = new Components($_POST['name']);
-        $this->_model->save();
-        header('Location: '. PROOT . 'components/index');
+        if(!$this->_model->exists()) {
+          if($this->_model->isValid()) {
+            $this->_model->save();
+            header('Location: ' . PROOT . 'components/index'); die();
+          } else {
+            $this->_view->errors = $this->_model->getErrors();
+          }
+        } else {
+          $this->_view->errors = ["Component already exists"];
+        }
       }
       $this->_view->render('components/add');
     }
@@ -30,7 +39,7 @@
 
     public function deleteAction($id) {
       if($this->_model->delete($id)) {
-        header('Location: '. PROOT . 'components/index');
+        header('Location: ' . PROOT . 'components/index'); die();
       }
     }
   }

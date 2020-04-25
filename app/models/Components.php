@@ -4,6 +4,7 @@
 
     private $_name;
     private $_db;
+    private $_errors = [];
 
 
     public function __construct($name = '') {
@@ -17,7 +18,7 @@
         'Columns' => ['name'],
         'Conditions' => ['name' => $this->_name]
       ];
-      if (count($this->_db->select('Components', $params)) > 0) {
+      if(count($this->_db->select('Components', $params)) > 0) {
         return true;
       }
       return false;
@@ -46,4 +47,19 @@
       return $this->_db->select('Components', $params);
     }
 
+
+    public function isValid() {
+      if(strlen($this->_name) < 3) {
+        $this->_errors[] = 'Name must be at least 3 characters long';
+      }
+      if(count($this->_errors) > 0) {
+        return false;
+      }
+      return true;
+    }
+
+
+    public function getErrors() {
+      return $this->_errors;
+    }
   }

@@ -7,10 +7,13 @@
     private $_body;
     private $_outputBuffer;
     private $_siteTitle;
+    public $errors = [];
+
 
     public function __construct() {
 
     }
+
 
     public function render($view) {
       $view = str_replace('/', DS, $view);
@@ -22,14 +25,17 @@
       }
     }
 
+
     public function setLayout($layout) {
       $this->_layout = $layout;
     }
+
 
     public function start($type) {
       $this->_outputBuffer = $type;
       ob_start();
     }
+
 
     public function end() {
       if($this->_outputBuffer == 'head') {
@@ -41,6 +47,7 @@
       }
     }
 
+
     public function content($type) {
       if($type == 'head') {
         return $this->_head;
@@ -50,12 +57,13 @@
       return false;
     }
 
+
     public function setSiteTitle($title) {
       $this->_siteTitle = $title;
     }
 
+
     public function getSiteTitle() {
       return $this->_siteTitle;
     }
-
   }
