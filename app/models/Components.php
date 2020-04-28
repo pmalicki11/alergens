@@ -50,7 +50,7 @@
 
     public function isValid() {
       if(strlen($this->_name) < 3) {
-        $this->_errors[] = 'Name must be at least 3 characters long';
+        $this->_errors += ['name' => 'Name must be at least 3 characters long'];
       }
       if(count($this->_errors) > 0) {
         return false;

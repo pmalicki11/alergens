@@ -30,7 +30,7 @@
             $this->_view->errors = $this->_model->getErrors();
           }
         } else {
-          $this->_view->errors = ["Component already exists"];
+          $this->_view->errors = ['name' => 'Component already exists'];
         }
       }
       $this->_view->render('components/add');

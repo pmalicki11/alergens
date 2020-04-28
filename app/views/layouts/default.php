@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="<?=PROOT?>css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat&display=swap">
     <title><?=$this->getSiteTitle();?></title>
     <?=$this->content('head');?>
   </head>

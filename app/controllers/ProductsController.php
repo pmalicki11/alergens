@@ -31,7 +31,7 @@
             $this->_view->errors = $this->_model->getErrors();
           }
         } else {
-          $this->_view->errors = ["Product already exists"];
+          $this->_view->errors = ['name' => 'Product already exists'];
         }
       }
       $this->_view->render('products/add');

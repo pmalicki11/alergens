@@ -1,8 +1,43 @@
-table, th, td {
+.table-std, .th-std, .td-std {
   border: 1px solid black;
   border-collapse: collapse;
 }
 
-th, td {
+.center {
+  text-align: center;
+}
+
+.th-std, .td-std {
   padding: 5px;
+}
+
+.form-input-text {
+  border-style: solid;
+  border-width: 1px;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.form-input-text-error {
+  border-style: solid;
+  border-width: 1px;
+  border-color: red;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.btn-submit {
+  background-color: #4d94ff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 60px;
+  opacity: 1;
+  transition: 0.2s;
+}
+
+.btn-submit:hover {
+  opacity: 0.7;
 }

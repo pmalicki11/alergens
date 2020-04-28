@@ -93,22 +93,22 @@
 
     public function isValid() {
       if(strlen($this->_name) < 2) {
-        $this->_errors[] = 'Name must be at least 2 characters long';
+        $this->_errors += ['name' =>'Name must be at least 2 characters long'];
       }
       if(strlen($this->_portion) > 0 && !is_numeric($this->_portion)) {
-        $this->_errors[] = 'Portion value must be numeric';
+        $this->_errors += ['portion' => 'Portion value must be numeric'];
       }
       if(strlen($this->_energy) > 0 && !is_numeric($this->_energy)) {
-        $this->_errors[] = 'Energy value must be numeric';
+        $this->_errors += ['energy' => 'Energy value must be numeric'];
       }
       if(strlen($this->_fat) > 0 && !is_numeric($this->_fat)) {
-        $this->_errors[] = 'Fat value must be numeric';
+        $this->_errors += ['fat' => 'Fat value must be numeric'];
       }
       if(strlen($this->_carbohydrates) > 0 && !is_numeric($this->_carbohydrates)) {
-        $this->_errors[] = 'Carbohydrates value must be numeric';
+        $this->_errors += ['carbohydrates' => 'Carbohydrates value must be numeric'];
       }
       if(strlen($this->_protein) > 0 && !is_numeric($this->_protein)) {
-        $this->_errors[] = 'Protein value must be numeric';
+        $this->_errors += ['protein' => 'Protein value must be numeric'];
       }
 
       if(count($this->_errors) > 0) {
