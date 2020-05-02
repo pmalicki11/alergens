@@ -52,7 +52,7 @@
         value="<?=(isset($_POST['protein'])) ? $_POST['protein'] : ''?>"
         class="form-input-text<?=(array_key_exists('protein', $this->errors) ? '-error' : '')?>"></td>
     </tr>
-    <tr><td colspan="2" class="center"><input type="submit" value="Add" class="btn-submit"></td></tr>
+    <tr><td colspan="2" class="center"><input type="submit" value="Add" class="btn-submit"></input></td></tr>
   </table>
 </form>
 <?php $this->end();?>
