@@ -11,6 +11,7 @@
     private $_protein;
     private $_db;
     private $_errors = [];
+    private $_table;
 
 
     public function __construct($name = '', $producer = '', $portion = '', $energy = '', $fat = '', $carbohydrates = '', $protein = '') {
@@ -22,6 +23,7 @@
       $this->_carbohydrates = $carbohydrates;
       $this->_protein = $protein;
       $this->_db = DB::getInstance();
+      $this->_table = 'products';
     }
 
 
@@ -45,7 +47,7 @@
         ]
       ];
 
-      if (count($this->_db->select('Products', $params)) > 0) {
+      if (count($this->_db->select($this->_table, $params)) > 0) {
         return true;
       }
       return false;
@@ -63,14 +65,14 @@
         'protein' => $this->_protein
       ];
       if(!$this->exists()) {
-        $this->_db->insert('Products', $params);
+        $this->_db->insert($this->_table, $params);
       }
     }
 
 
     public function delete($id) {
       $params = ['Conditions' => ['id' => $id]];
-      return $this->_db->delete('Products', $params);
+      return $this->_db->delete($this->_table, $params);
     }
 
 
@@ -87,7 +89,7 @@
           'protein'
           ]
       ];
-      return $this->_db->select('Products', $params);
+      return $this->_db->select($this->_table, $params);
     }
 
 
