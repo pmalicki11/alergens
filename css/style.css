@@ -42,6 +42,10 @@ body {
   float: left;
 }
 
+.nav-item-active{
+  background-color: #ffa500;
+}
+
 .nav-item:hover {
   background-color: #99c2ff;
 }

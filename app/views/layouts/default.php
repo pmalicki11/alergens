@@ -11,13 +11,7 @@
   </head>
   <body>
     <h1>Food Registration</h1>
-    <ul class="nav-menu" id="nav">
-      <li class="nav-item"><a href="<?=PROOT?>home/index">Home</a></li>
-      <li class="nav-item"><a href="<?=PROOT?>products/index">Products</a></li>
-      <li class="nav-item"><a href="<?=PROOT?>products/add">Add product</a></li>
-      <li class="nav-item"><a href="<?=PROOT?>components/index">Components</a></li>
-      <li class="nav-item"><a href="<?=PROOT?>components/add">Add component</a></li>
-    </ul>
+    <?php include 'menu.php'; ?>
     <?=$this->content('body');?>
   </body>
 </html>
