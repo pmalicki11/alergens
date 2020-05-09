@@ -2,6 +2,18 @@ body {
 	font-family: 'Montserrat';
 }
 
+.center {
+	text-align: center;
+}
+
+.form-input {
+	margin: auto;
+}
+
+.form-input td {
+	padding: 10px;
+}
+
 .list-container {
   overflow-x: auto;
 }
@@ -12,17 +24,17 @@ body {
   text-align: left;
 }
 
-.th-list, .td-list {
+.table-list th, .table-list td {
   padding: 10px;
 }
 
-.th-list {
-  font-weight: normal;
+.table-lsit th {
+	font-weight: normal;
   background-color: #4d94ff;
   color: white;
 }
 
-.tr-list:nth-child(even) {
+.table-list tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
@@ -32,7 +44,7 @@ body {
 
 .nav-menu {
   list-style-type: none;
-  margin: 0;
+  margin: 0 0 10px 0;
   padding: 0;
   overflow: hidden;
   background-color: #4d94ff;
@@ -100,7 +112,7 @@ body {
   opacity: 0.7;
 }
 
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 640px) {
   .nav-item {
     float: none;
   }

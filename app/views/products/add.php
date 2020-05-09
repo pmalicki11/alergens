@@ -1,6 +1,5 @@
 <?php $this->setSiteTitle('Products');?>
 <?php $this->start('body');?>
-<p>Add Product Page</p>
 
 <ul>
   <?php foreach($this->errors as $field => $error): ?>
@@ -9,7 +8,7 @@
 </ul>
 
 <form action="<?=PROOT?>products/add" method="post">
-  <table>
+  <table class="form-input">
     <tr>
       <td><label for="name">Name:</label></td>
       <td><input type="text" id="name" name="name"
