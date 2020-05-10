@@ -54,6 +54,10 @@ body {
   float: left;
 }
 
+.nav-item-right {
+  float: right;
+}
+
 .nav-item-active{
   background-color: #ffa500;
 }
@@ -62,7 +66,7 @@ body {
   background-color: #99c2ff;
 }
 
-.nav-item a {
+.nav-item a, .nav-item-right a {
   font-weight: bold;
   display: block;
   padding: 15px;
@@ -113,7 +117,7 @@ body {
 }
 
 @media screen and (max-width: 640px) {
-  .nav-item {
+  .nav-item, .nav-item-right {
     float: none;
   }
 }

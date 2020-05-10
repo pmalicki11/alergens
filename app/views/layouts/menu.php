@@ -26,4 +26,11 @@
       <a href="<?=PROOT.$path?>"><?=$label?></a>
     </li>
   <?php endforeach; ?>
+  <li class="nav-item-right">
+  <?php if(isset($_SESSION['user'])): ?>
+    <a href="<?=PROOT . 'auth/logout'?>">Logout <?=$_SESSION['user']['username']?></a>
+  <?php else: ?>
+    <a href="<?=PROOT . 'auth/login'?>">Login</a>
+  <?php endif; ?>
+  </li>
 </ul>

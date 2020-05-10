@@ -22,10 +22,10 @@
 
 
     public function getFromPost($post) {
-      $this->_username = $post['username'];
-      $this->_email = $post['email'];
-      $this->_password = $post['password'];
-      $this->_repassword = $post['repassword'];
+      isset($post['username']) ? $this->_username = $post['username'] : '';
+      isset($post['email']) ? $this->_email = $post['email'] : '';
+      isset($post['password']) ? $this->_password = $post['password'] : '';
+      isset($post['repassword']) ? $this->_repassword = $post['repassword'] : '';
     }
 
 
@@ -39,6 +39,27 @@
       ];
 
       $this->_db->insert($this->_table, $params);
+    }
+
+
+    public function login() {
+      $params = [
+        'Columns' => ['id', 'username', 'email', 'password', 'acl', 'active'],
+        'Conditions' => ['username' => $this->_username]
+      ];
+      $user = $this->_db->select($this->_table, $params);
+      if(count($user) > 0) {
+        $user = $user[0];
+        if($this->_password == $user['password']) {
+          $_SESSION['user'] = $user;
+          return true;
+        } else {
+          $this->_errors += ['password' => 'Wrong password'];
+        }
+      } else {
+        $this->_errors += ['username' => 'Username ' . $this->_username . ' does not exist'];
+      }
+      return false;
     }
 
 
