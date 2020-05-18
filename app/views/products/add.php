@@ -52,6 +52,35 @@
         class="form-input-text<?=(array_key_exists('protein', $this->errors) ? '-error' : '')?>"></td>
     </tr>
     <tr>
+      <td><label for="components">Components:</label></td>
+      <td>
+        <div class="form-input-text chosen-container">
+          <ul class="chosen-choices">
+            <li class="search-choice">
+              <span>Mąka</span>
+              <a href="#"><i class="material-icons color-red">clear</i></a>
+            </li>
+            <li class="search-choice">
+              <span>Sól</span>
+              <a href="#"><i class="material-icons color-red">clear</i></a>
+            </li>
+            <li class="search-choice">
+              <span>Masa kakaowa</span>
+              <a href="#"><i class="material-icons color-red">clear</i></a>
+            </li>
+            <li class="chosen-search-field">
+              <input class="chosen-search-input" type="text">
+            </li>
+          </ul>
+          <div class="chosen-dropdown">
+            <ul class="chosen-results">
+
+            </ul>
+          <div>
+        </div>
+      </td>
+    </tr>
+    <tr>
       <td colspan="2" class="center"><input type="submit" value="Add" class="btn-submit"></input></td>
     </tr>
   </table>

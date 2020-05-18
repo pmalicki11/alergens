@@ -1,5 +1,6 @@
 body {
 	font-family: 'Montserrat';
+	box-sizing: border-box;
 }
 
 .center {
@@ -58,7 +59,7 @@ body {
   float: right;
 }
 
-.nav-item-active{
+.nav-item-active {
   background-color: #ffa500;
 }
 
@@ -78,6 +79,8 @@ body {
 .form-input-text {
   border-style: solid;
   border-width: 1px;
+	border-color: gray;
+	width: 100%;
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
@@ -115,6 +118,47 @@ body {
 .btn-submit:hover, .btn-remove:hover {
   opacity: 0.7;
 }
+
+.chosen-container {
+
+}
+
+.chosen-choices {
+	display: inline-block;
+	list-style: none;
+	height: auto;
+	padding: 0px;
+	margin: 0px;
+}
+
+.chosen-choices li {
+	display: inline-block;
+	float: left;
+	overflow: hidden;
+}
+
+.chosen-choices li.search-choice {
+	background-color: #d9d9d9;
+  padding: 4px;
+  margin: 2px 2px 2px 0px;
+  border-radius: 5px;
+	font-size: 80%;
+}
+
+.search-choice a {
+	text-decoration: none;
+	color: inherit;
+	vertical-align: middle;
+}
+.chosen-choices li.chosen-search-field {
+	border-style: none;
+}
+
+.chosen-search-input {
+	border-style: none;
+}
+
+
 
 @media screen and (max-width: 640px) {
   .nav-item, .nav-item-right {
