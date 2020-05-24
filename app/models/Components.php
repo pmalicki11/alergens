@@ -18,7 +18,7 @@
     public function exists() {
       $params = [
         'Columns' => ['name'],
-        'Conditions' => ['name' => $this->_name]
+        'Conditions' => ['name' => ['=', $this->_name]]
       ];
       if(count($this->_db->select($this->_table, $params)) > 0) {
         return true;
@@ -28,8 +28,8 @@
 
 
     public function save() {
-      $params = ['name' => $this->_name];
       if(!$this->exists()) {
+        $params = ['name' => $this->_name];
         $this->_db->insert($this->_table, $params);
       }
     }
@@ -46,6 +46,15 @@
 
     public function getAll() {
       $params = ['Columns' => ['id', 'name']];
+      return $this->_db->select($this->_table, $params);
+    }
+
+
+    public function getByNamePart($name) {
+      $params = [
+        'Columns' => ['id', 'name'],
+        'Conditions' => ['name' => ['LIKE', $name.'%']]
+      ];
       return $this->_db->select($this->_table, $params);
     }
 

@@ -23,7 +23,7 @@
     }
 
 
-    public function select($table, $params) {
+    public function select($table, $params, $like = false) {
       $columnString = '';
       $conditions = '';
       $bindingParams = [];
@@ -33,12 +33,12 @@
       $columnString = rtrim($columnString, ',');
       if(isset($params['Conditions'])) {
         foreach($params['Conditions'] as $column => $value) {
-          $conditions .= "`{$column}`=? AND ";
+          $conditions .= "`{$column}` {$value[0]} ? AND ";
+          $bindingParams[] = $value[1];
         }
         $conditions = rtrim($conditions, ' AND ');
         if(strlen($conditions) > 0) {
           $conditions = ' WHERE ' . $conditions;
-          $bindingParams = array_merge($bindingParams, array_values($params['Conditions']));
         }
       }
 

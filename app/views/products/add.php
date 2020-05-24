@@ -1,4 +1,9 @@
 <?php $this->setSiteTitle('Products');?>
+
+<?php $this->start('head');?>
+<script src="<?=PROOT?>js/script.js"></script>
+<?php $this->end();?>
+
 <?php $this->start('body');?>
 
 <ul>
@@ -54,29 +59,15 @@
     <tr>
       <td><label for="components">Components:</label></td>
       <td>
-        <div class="form-input-text chosen-container">
-          <ul class="chosen-choices">
-            <li class="search-choice">
-              <span>Mąka</span>
-              <a href="#"><i class="material-icons color-red">clear</i></a>
-            </li>
-            <li class="search-choice">
-              <span>Sól</span>
-              <a href="#"><i class="material-icons color-red">clear</i></a>
-            </li>
-            <li class="search-choice">
-              <span>Masa kakaowa</span>
-              <a href="#"><i class="material-icons color-red">clear</i></a>
-            </li>
+        <div class="form-input-text chosen-container" onclick="goToInput()">
+          <ul class="chosen-choices" id="chosen-choices">
             <li class="chosen-search-field">
-              <input class="chosen-search-input" type="text">
+              <input class="chosen-search-input" id="chosen-search-input" type="text" onkeyup="getComponents(this.value)">
             </li>
           </ul>
-          <div class="chosen-dropdown">
-            <ul class="chosen-results">
-
-            </ul>
-          <div>
+        </div>
+        <div class="chosen-dropdown">
+          <ul class="chosen-results" id="chosen-results"></ul>
         </div>
       </td>
     </tr>

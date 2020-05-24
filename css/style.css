@@ -80,7 +80,7 @@ body {
   border-style: solid;
   border-width: 1px;
 	border-color: gray;
-	width: 100%;
+	width: 400px;
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
@@ -90,6 +90,7 @@ body {
   border-style: solid;
   border-width: 1px;
   border-color: red;
+	width: 400px;
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
@@ -120,7 +121,9 @@ body {
 }
 
 .chosen-container {
-
+	cursor: text;
+	margin-bottom: 0px;
+	width: 400px;
 }
 
 .chosen-choices {
@@ -135,6 +138,7 @@ body {
 	display: inline-block;
 	float: left;
 	overflow: hidden;
+	cursor: default;
 }
 
 .chosen-choices li.search-choice {
@@ -156,6 +160,31 @@ body {
 
 .chosen-search-input {
 	border-style: none;
+}
+
+.chosen-dropdown {
+	background-color: yellow;
+	margin: 0px 5px;
+	background-color: #d9d9d9;
+  padding: 0px;
+  border-radius: 5px;
+
+}
+
+.chosen-results {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.chosen-results li {
+	padding: 5px;
+	padding-left: 40px;
+	border-radius: 5px;
+}
+
+.chosen-results li:hover {
+	background-color: #bfbfbf;
 }
 
 

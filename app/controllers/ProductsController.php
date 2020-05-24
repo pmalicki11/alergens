@@ -43,4 +43,24 @@
         header('Location: '. PROOT . 'products/index');
       }
     }
+
+
+    public function ajaxAction() {
+      $namePart = $_REQUEST["namepart"];
+      $components = new Components();
+      $result = array_column($components->getByNamePart($namePart), "name");
+      $jsonOut = '';
+      if(count($result) > 0) {
+        $jsonOut .= '[';
+        foreach ($result as $value) {
+          $jsonOut .= '"' . $value .'",';
+        }
+        $jsonOut = rtrim($jsonOut, ',');
+        $jsonOut .= ']';
+        echo $jsonOut;
+      } else {
+        echo "";
+      }
+      //echo implode(',', array_column($components->getByNamePart($namePart), "name"));
+    }
   }
