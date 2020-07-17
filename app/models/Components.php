@@ -1,17 +1,12 @@
 <?php
 
-  class Components {
+  class Components extends Model {
 
     private $_name;
-    private $_db;
-    private $_errors = [];
-    private $_table;
-
 
     public function __construct($name = '') {
+      parent::__construct('components');
       $this->_name = $name;
-      $this->_db = DB::getInstance();
-      $this->_table = 'components';
     }
 
 
@@ -44,12 +39,6 @@
     }
 
 
-    public function getAll() {
-      $params = ['Columns' => ['id', 'name']];
-      return $this->_db->select($this->_table, $params);
-    }
-
-
     public function getByNamePart($name) {
       $params = [
         'Columns' => ['id', 'name'],
@@ -69,8 +58,4 @@
       return true;
     }
 
-
-    public function getErrors() {
-      return $this->_errors;
-    }
   }

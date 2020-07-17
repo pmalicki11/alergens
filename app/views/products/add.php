@@ -1,7 +1,7 @@
 <?php $this->setSiteTitle('Products');?>
 
 <?php $this->start('head');?>
-<script src="<?=PROOT?>js/script.js"></script>
+<script src="<?=PROOT?>js/products.js"></script>
 <?php $this->end();?>
 
 <?php $this->start('body');?>
@@ -12,7 +12,7 @@
   <?php endforeach; ?>
 </ul>
 
-<form action="<?=PROOT?>products/add" method="post">
+<form action="<?=PROOT?>products/add" method="post" id="form">
   <table class="form-input">
     <tr>
       <td><label for="name">Name:</label></td>
@@ -59,10 +59,10 @@
     <tr>
       <td><label for="components">Components:</label></td>
       <td>
-        <div class="form-input-text chosen-container" onclick="goToInput()">
+        <div class="form-input-text chosen-container" id="chosen-container">
           <ul class="chosen-choices" id="chosen-choices">
             <li class="chosen-search-field">
-              <input class="chosen-search-input" id="chosen-search-input" type="text" onkeyup="getComponents(this.value)">
+              <input class="chosen-search-input" id="chosen-search-input" type="text" autocomplete="off">
             </li>
           </ul>
         </div>

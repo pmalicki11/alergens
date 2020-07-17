@@ -23,7 +23,7 @@
     }
 
 
-    public function select($table, $params, $like = false) {
+    public function select($table, $params) {
       $columnString = '';
       $conditions = '';
       $bindingParams = [];
@@ -74,5 +74,9 @@
     }
 
 
-
+    public function getColumns($table) {
+      $query = $this->_pdo->prepare("DESCRIBE `{$table}`");
+      $query->execute();
+      return $query->fetchAll(PDO::FETCH_COLUMN);
+    }
   }

@@ -1,6 +1,6 @@
 <?php
 
-  class Products {
+  class Products extends Model {
 
     private $_name;
     private $_producer;
@@ -9,12 +9,9 @@
     private $_fat;
     private $_carbohydrates;
     private $_protein;
-    private $_db;
-    private $_errors = [];
-    private $_table;
-
 
     public function __construct($name = '', $producer = '', $portion = '', $energy = '', $fat = '', $carbohydrates = '', $protein = '') {
+      parent::__construct('products');
       $this->_name = $name;
       $this->_producer = $producer;
       $this->_portion = $portion;
@@ -22,8 +19,6 @@
       $this->_fat = $fat;
       $this->_carbohydrates = $carbohydrates;
       $this->_protein = $protein;
-      $this->_db = DB::getInstance();
-      $this->_table = 'products';
     }
 
 
@@ -42,8 +37,8 @@
       $params = [
         'Columns' => ['name'],
         'Conditions' => [
-          'name' => $this->_name,
-          'producer' => $this->_producer
+          'name' => ['=', $this->_name],
+          'producer' => ['=', $this->_producer]
         ]
       ];
 
@@ -76,23 +71,6 @@
     }
 
 
-    public function getAll() {
-      $params = [
-        'Columns' => [
-          'id',
-          'name',
-          'producer',
-          'portion',
-          'energy',
-          'fat',
-          'carbohydrates',
-          'protein'
-          ]
-      ];
-      return $this->_db->select($this->_table, $params);
-    }
-
-
     public function isValid() {
       if(strlen($this->_name) < 2) {
         $this->_errors += ['name' =>'Name must be at least 2 characters long'];
@@ -117,9 +95,5 @@
         return false;
       }
       return true;
-    }
-
-    public function getErrors() {
-      return $this->_errors;
     }
   }
