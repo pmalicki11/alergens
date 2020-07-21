@@ -2,59 +2,59 @@
 
   class Products extends Model {
 
-    private $_name;
-    private $_producer;
-    private $_portion;
-    private $_energy;
-    private $_fat;
-    private $_carbohydrates;
-    private $_protein;
+    public $name;
+    public $producer;
+    public $portion;
+    public $energy;
+    public $fat;
+    public $carbohydrates;
+    public $protein;
 
     public function __construct() {
       parent::__construct('products');
     }
 
 
-    public function getFromPost($post) {
-      $this->_name = $post['name'];
-      $this->_producer = $post['producer'];
-      $this->_portion = str_replace(',', '.', $post['portion']);
-      $this->_energy = str_replace(',', '.', $post['energy']);
-      $this->_fat = str_replace(',', '.', $post['fat']);
-      $this->_carbohydrates = str_replace(',', '.', $post['carbohydrates']);
-      $this->_protein = str_replace(',', '.', $post['protein']);
+    public function getFromPost() {
+      if(!isset($_POST['name'], $_POST['producer'], $_POST['portion'], $_POST['energy'], $_POST['fat'], $_POST['carbohydrates'], $_POST['protein'])) {
+        return false;
+      }
+      $this->name = $_POST['name'];
+      $this->producer = $_POST['producer'];
+      $this->portion = str_replace(',', '.', $_POST['portion']);
+      $this->energy = str_replace(',', '.', $_POST['energy']);
+      $this->fat = str_replace(',', '.', $_POST['fat']);
+      $this->carbohydrates = str_replace(',', '.', $_POST['carbohydrates']);
+      $this->protein = str_replace(',', '.', $_POST['protein']);
+      return true;
     }
 
 
-    public function exists() {
+    public function find($conditions) {
       $params = [
         'Columns' => ['name'],
-        'Conditions' => [
-          'name' => ['=', $this->_name],
-          'producer' => ['=', $this->_producer]
-        ]
+        'Conditions' => $conditions
       ];
-
-      if (count($this->_db->select($this->_table, $params)) > 0) {
-        return true;
-      }
-      return false;
+      return $this->_db->select($this->_table, $params);
     }
 
 
     public function save() {
-      $params = [
-        'name' => $this->_name,
-        'producer' => $this->_producer,
-        'portion' => $this->_portion,
-        'energy' => $this->_energy,
-        'fat' => $this->_fat,
-        'carbohydrates' => $this->_carbohydrates,
-        'protein' => $this->_protein
-      ];
-      if(!$this->exists()) {
+      $this->validate();
+      if($this->_isValid) {
+        $params = [
+          'name' => $this->name,
+          'producer' => $this->producer,
+          'portion' => $this->portion,
+          'energy' => $this->energy,
+          'fat' => $this->fat,
+          'carbohydrates' => $this->carbohydrates,
+          'protein' => $this->protein
+        ];
         $this->_db->insert($this->_table, $params);
+        return true;
       }
+      return false;
     }
 
 
@@ -64,29 +64,14 @@
     }
 
 
-    public function isValid() {
-      if(strlen($this->_name) < 2) {
-        $this->_errors += ['name' =>'Name must be at least 2 characters long'];
-      }
-      if(strlen($this->_portion) > 0 && !is_numeric($this->_portion)) {
-        $this->_errors += ['portion' => 'Portion value must be numeric'];
-      }
-      if(strlen($this->_energy) > 0 && !is_numeric($this->_energy)) {
-        $this->_errors += ['energy' => 'Energy value must be numeric'];
-      }
-      if(strlen($this->_fat) > 0 && !is_numeric($this->_fat)) {
-        $this->_errors += ['fat' => 'Fat value must be numeric'];
-      }
-      if(strlen($this->_carbohydrates) > 0 && !is_numeric($this->_carbohydrates)) {
-        $this->_errors += ['carbohydrates' => 'Carbohydrates value must be numeric'];
-      }
-      if(strlen($this->_protein) > 0 && !is_numeric($this->_protein)) {
-        $this->_errors += ['protein' => 'Protein value must be numeric'];
-      }
-
-      if(count($this->_errors) > 0) {
-        return false;
-      }
-      return true;
+    public function validate() {
+      $this->runValidation(new MinValidator($this, ['field' => 'name', 'msg' => 'Name must be at least 2 characters long.', 'rule' => 2]));
+      $this->runValidation(new UniqueValidator($this, ['field' => 'name', 'msg' => 'Product already exists.']));
+      $this->runValidation(new MinValidator($this, ['field' => 'producer', 'msg' => 'Producer must be at least 2 characters long.', 'rule' => 2]));
+      $this->runValidation(new NumericValidator($this, ['field' => 'portion', 'msg' => 'Portion must be numeric.']));
+      $this->runValidation(new NumericValidator($this, ['field' => 'energy', 'msg' => 'Energy must be numeric.']));
+      $this->runValidation(new NumericValidator($this, ['field' => 'fat', 'msg' => 'Fat must be numeric.']));
+      $this->runValidation(new NumericValidator($this, ['field' => 'carbohydrates', 'msg' => 'Carbohydrates must be numeric.']));
+      $this->runValidation(new NumericValidator($this, ['field' => 'protein', 'msg' => 'Protein must be numeric.']));
     }
   }

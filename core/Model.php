@@ -5,7 +5,7 @@
     protected $_db;
     protected $_errors = [];
     protected $_isValid;
-    protected $table;
+    protected $_table;
 
     public function __construct($table) {
       $this->_db = DB::getInstance();
@@ -17,6 +17,13 @@
       $columns = $this->_db->getColumns($this->_table);
       $params = ['Columns' => $columns];
       return $this->_db->select($this->_table, $params);
+    }
+
+    public function runValidation($validator) {
+      if(!$validator->isValid) {
+        $this->_isValid = false;
+        $this->_errors[$validator->field] = $validator->msg;
+      }
     }
 
     public function getErrors() {

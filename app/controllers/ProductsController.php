@@ -19,21 +19,15 @@
 
 
     public function addAction() {
-      if(isset($_POST['name'])) {
-        $this->_view->errors = [];
-        $this->_model = new Products();
-        $this->_model->getFromPost($_POST);
-        if(!$this->_model->exists()) {
-          if($this->_model->isValid()) {
-            $this->_model->save();
-            header('Location: ' . PROOT . 'products/index'); die();
-          } else {
-            $this->_view->errors = $this->_model->getErrors();
-          }
-        } else {
-          $this->_view->errors = ['name' => 'Product already exists'];
+      $this->_model = new Products();
+      $this->_view->errors = [];
+      if($this->_model->getFromPost()) {
+        if($this->_model->save()) {
+          header('Location: ' . PROOT . 'products/index');
+          die();
         }
       }
+      $this->_view->errors = $this->_model->getErrors();
       $this->_view->render('products/add');
     }
 

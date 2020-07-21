@@ -60,13 +60,4 @@
       $this->runValidation(new MinValidator($this, ['field' => 'name', 'msg' => 'Name must be at least 3 characters long.', 'rule' => 3]));
       $this->runValidation(new UniqueValidator($this, ['field' => 'name', 'msg' => 'Component already exists.']));
     }
-
-
-    public function runValidation($validator) {
-      if(!$validator->isValid) {
-        $this->_isValid = false;
-        $this->_errors[$validator->field] = $validator->msg;
-      }
-    }
-
   }
