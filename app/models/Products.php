@@ -10,15 +10,8 @@
     private $_carbohydrates;
     private $_protein;
 
-    public function __construct($name = '', $producer = '', $portion = '', $energy = '', $fat = '', $carbohydrates = '', $protein = '') {
+    public function __construct() {
       parent::__construct('products');
-      $this->_name = $name;
-      $this->_producer = $producer;
-      $this->_portion = $portion;
-      $this->_energy = $energy;
-      $this->_fat = $fat;
-      $this->_carbohydrates = $carbohydrates;
-      $this->_protein = $protein;
     }
 
 

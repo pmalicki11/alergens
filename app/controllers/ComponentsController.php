@@ -17,7 +17,19 @@
       $this->_view->render('components/index');
     }
 
+    public function addAction() {
+      $this->_model = new Components();
+      $this->_view->errors = [];
+      if($this->_model->getFromPost()) {
+        if($this->_model->save()){
+          header('Location: ' . PROOT . 'components/index'); die();
+        }
+      }
+      $this->_view->errors = $this->_model->getErrors();
+      $this->_view->render('components/add');
+    }
 
+    /*
     public function addAction() {
       if(isset($_POST['name'])) {
         $this->_view->errors = [];
@@ -35,6 +47,7 @@
       }
       $this->_view->render('components/add');
     }
+    */
 
 
     public function deleteAction($id) {

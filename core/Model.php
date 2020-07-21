@@ -4,11 +4,13 @@
 
     protected $_db;
     protected $_errors = [];
+    protected $_isValid;
     protected $table;
 
     public function __construct($table) {
       $this->_db = DB::getInstance();
       $this->_table = $table;
+      $this->_isValid = true;
     }
 
     public function getAll() {
@@ -17,7 +19,7 @@
       return $this->_db->select($this->_table, $params);
     }
 
-    protected function getErrors() {
+    public function getErrors() {
       return $this->_errors;
     }
   }

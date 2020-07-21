@@ -2,31 +2,39 @@
 
   class Components extends Model {
 
-    private $_name;
+    public $name;
 
     public function __construct($name = '') {
       parent::__construct('components');
-      $this->_name = $name;
+      $this->name = $name;
     }
 
-
-    public function exists() {
-      $params = [
-        'Columns' => ['name'],
-        'Conditions' => ['name' => ['=', $this->_name]]
-      ];
-      if(count($this->_db->select($this->_table, $params)) > 0) {
+    public function getFromPost() {
+      if(isset($_POST['name'])) {
+        $this->name = $_POST['name'];
         return true;
       }
       return false;
     }
 
 
+    public function find($conditions) {
+      $params = [
+        'Columns' => ['name'],
+        'Conditions' => $conditions
+      ];
+      return $this->_db->select($this->_table, $params);
+    }
+
+
     public function save() {
-      if(!$this->exists()) {
-        $params = ['name' => $this->_name];
+      $this->validate();
+      if($this->_isValid) {
+        $params = ['name' => $this->name];
         $this->_db->insert($this->_table, $params);
+        return true;
       }
+      return false;
     }
 
 
@@ -48,14 +56,17 @@
     }
 
 
-    public function isValid() {
-      if(strlen($this->_name) < 3) {
-        $this->_errors += ['name' => 'Name must be at least 3 characters long'];
+    public function validate() {
+      $this->runValidation(new MinValidator($this, ['field' => 'name', 'msg' => 'Name must be at least 3 characters long.', 'rule' => 3]));
+      $this->runValidation(new UniqueValidator($this, ['field' => 'name', 'msg' => 'Component already exists.']));
+    }
+
+
+    public function runValidation($validator) {
+      if(!$validator->isValid) {
+        $this->_isValid = false;
+        $this->_errors[$validator->field] = $validator->msg;
       }
-      if(count($this->_errors) > 0) {
-        return false;
-      }
-      return true;
     }
 
   }
