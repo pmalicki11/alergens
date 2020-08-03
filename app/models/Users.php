@@ -45,13 +45,13 @@
     public function login() {
       $params = [
         'Columns' => ['id', 'username', 'email', 'password', 'acl', 'active'],
-        'Conditions' => ['username' => $this->_username]
+        'Conditions' => ['username' => ['=', $this->_username]]
       ];
       $user = $this->_db->select($this->_table, $params);
       if(count($user) > 0) {
         $user = $user[0];
         if($this->_password == $user['password']) {
-          $_SESSION['user'] = $user;
+          $_SESSION[USER_SESSION] = $user['id'];
           return true;
         } else {
           $this->_errors += ['password' => 'Wrong password'];

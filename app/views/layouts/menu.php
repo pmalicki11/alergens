@@ -27,8 +27,8 @@
     </li>
   <?php endforeach; ?>
   <li class="nav-item-right">
-  <?php if(isset($_SESSION['user'])): ?>
-    <a href="<?=PROOT . 'auth/logout'?>">Logout <?=$_SESSION['user']['username']?></a>
+  <?php if(isset($_SESSION[USER_SESSION])): ?>
+    <a href="<?=PROOT . 'auth/logout'?>">Logout</a>
   <?php else: ?>
     <a href="<?=PROOT . 'auth/login'?>">Login</a>
   <?php endif; ?>

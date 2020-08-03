@@ -12,7 +12,7 @@
 
 
     public function loginAction() {
-      if(!isset($_SESSION['user'])) {
+      if(!isset($_SESSION[USER_SESSION])) {
         if(!empty($_POST)) {
           $this->_model = new Users();
           $this->_model->getFromPost($_POST);
@@ -31,7 +31,7 @@
 
 
     public function logoutAction() {
-      if(isset($_SESSION['user'])) {
+      if(isset($_SESSION[USER_SESSION])) {
         session_unset();
       }
       header('Location: ' . PROOT . 'home/index'); die();

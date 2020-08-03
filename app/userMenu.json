@@ -1,0 +1,12 @@
+{
+  "user":
+  {
+    "Products": "products/index",
+    "Add product": "products/add",
+    "Components": "components/index",
+  },
+  "admin":
+  {
+    "Add component": "components/add"
+  }
+}
