@@ -6,12 +6,12 @@
   },
   "user":
   {
-    "Products": ["index", "add"],
+    "Products": ["index", "add", "delete"],
     "Components": "index"
   },
   "admin":
   {
-    "Products": ["index", "add"],
-    "Components": ["index", "add"]
+    "Products": ["index", "add", "delete"],
+    "Components": ["index", "add", "delete"]
   }
 }
