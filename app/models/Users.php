@@ -2,40 +2,41 @@
 
   class Users {
 
-    private $_username;
-    private $_email;
-    private $_password;
-    private $_repassword;
+    public $username;
+    public $email;
+    public $password;
+    public $repassword;
+    private $_acl;
     private $_db;
     private $_errors = [];
     private $_table;
 
 
     public function __construct($username = '', $email = '', $password = '', $repassword = '') {
-      $this->_username = $username;
-      $this->_email = $email;
-      $this->_password = $password;
-      $this->_repassword = $repassword;
+      $this->username = $username;
+      $this->email = $email;
+      $this->password = $password;
+      $this->repassword = $repassword;
       $this->_db = DB::getInstance();
       $this->_table = 'users';
     }
 
 
     public function getFromPost($post) {
-      isset($post['username']) ? $this->_username = $post['username'] : '';
-      isset($post['email']) ? $this->_email = $post['email'] : '';
-      isset($post['password']) ? $this->_password = $post['password'] : '';
-      isset($post['repassword']) ? $this->_repassword = $post['repassword'] : '';
+      isset($post['username']) ? $this->username = $post['username'] : '';
+      isset($post['email']) ? $this->email = $post['email'] : '';
+      isset($post['password']) ? $this->password = $post['password'] : '';
+      isset($post['repassword']) ? $this->repassword = $post['repassword'] : '';
     }
 
 
     public function save() {
       $params = [
-        'username' => $this->_username,
-        'email' => $this->_email,
-        'password' => $this->_password,
+        'username' => $this->username,
+        'email' => $this->email,
+        'password' => $this->password,
         'active' => '1',
-        'acl' => '1',
+        'acl' => 'user',
       ];
 
       $this->_db->insert($this->_table, $params);
@@ -45,12 +46,12 @@
     public function login() {
       $params = [
         'Columns' => ['id', 'username', 'email', 'password', 'acl', 'active'],
-        'Conditions' => ['username' => ['=', $this->_username]]
+        'Conditions' => ['username' => ['=', $this->username]]
       ];
       $user = $this->_db->select($this->_table, $params);
       if(count($user) > 0) {
         $user = $user[0];
-        if($this->_password == $user['password']) {
+        if($this->password == $user['password']) {
           $_SESSION[USER_SESSION] = $user['id'];
           return true;
         } else {
@@ -60,6 +61,23 @@
         $this->_errors += ['username' => 'Username ' . $this->_username . ' does not exist'];
       }
       return false;
+    }
+
+
+    public function getById($id) {
+      $params = [
+        'Columns' => ['id', 'username', 'email', 'password', 'acl', 'active'],
+        'Conditions' => ['id' => ['=', $id]]
+      ];
+      $user = $this->_db->select($this->_table, $params);
+      if(count($user) > 0) {
+        $user = $user[0];
+        $this->username = $user['username'];
+        $this->email = $user['email'];
+        $this->password = $user['password'];
+        $this->_acl = $user['acl'];
+      }
+      return $this;
     }
 
 
@@ -103,5 +121,36 @@
 
     public function getErrors() {
       return $this->_errors;
+    }
+
+
+    public static function getCurrentUser() {
+      $user = new Users();
+      if(isset($_SESSION[USER_SESSION])) {
+        $user->getById($_SESSION[USER_SESSION]);
+      }
+      return $user;
+    }
+
+
+    public function hasAccess($controller, $action) {
+      $acls = array_merge(['guest'], explode(',', $this->_acl));
+      $scope = json_decode(file_get_contents(ROOT . DS . 'config' . DS . 'acl.json'), true);
+      foreach ($acls as $acl) {
+        if(array_key_exists($acl, $scope)) {
+          foreach($scope[$acl] as $allowedController => $allowedActions) {
+            if($controller == $allowedController) {
+              if(is_array($allowedActions)) {
+                if(in_array($action, $allowedActions)) {
+                  return true;
+                }
+              } else if($allowedActions == $action) {
+                return true;
+              }
+            }
+          }
+        }
+      }
+      return false;
     }
   }

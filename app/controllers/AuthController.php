@@ -57,4 +57,9 @@
         header('Location: ' . PROOT . 'home/index'); die();
       }
     }
+
+
+    public function accessDeniedAction() {
+      $this->_view->render('auth/accessDenied');
+    }
   }

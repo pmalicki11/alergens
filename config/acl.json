@@ -1,0 +1,17 @@
+{
+  "guest":
+  {
+    "Home": "index",
+    "Auth": ["login", "logout", "register", "accessDenied"]
+  },
+  "user":
+  {
+    "Products": ["index", "add"],
+    "Components": "index"
+  },
+  "admin":
+  {
+    "Products": ["index", "add"],
+    "Components": ["index", "add"]
+  }
+}

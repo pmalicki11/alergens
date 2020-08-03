@@ -13,7 +13,10 @@
     }
   }
 
-  $menu = json_decode(file_get_contents(ROOT . DS . 'app' . DS . 'menu.json'), true);
+  $currentUser = Users::getCurrentUser();
+
+
+  $menu = json_decode(file_get_contents(ROOT . DS . 'config' . DS . 'menu.json'), true);
 
 ?>
 <ul class="nav-menu" id="nav">
@@ -28,7 +31,7 @@
   <?php endforeach; ?>
   <li class="nav-item-right">
   <?php if(isset($_SESSION[USER_SESSION])): ?>
-    <a href="<?=PROOT . 'auth/logout'?>">Logout</a>
+    <a href="<?=PROOT . 'auth/logout'?>">Logout <?=$currentUser->username;?></a>
   <?php else: ?>
     <a href="<?=PROOT . 'auth/login'?>">Login</a>
   <?php endif; ?>

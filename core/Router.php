@@ -3,17 +3,28 @@
   class Router {
 
     public static function route($url) {
+      $controllerName = 'Home';
+      $actionName = 'index';
       $controller = 'HomeController';
       $action = 'indexAction';
       $params = [];
 
       if(isset($url[0]) && $url[0] != '') {
-        $controller = ucwords($url[0]) . 'Controller';
+        $controllerName = ucwords($url[0]);
+        $controller = $controllerName . 'Controller';
+
       }
 
       array_shift($url);
       if(isset($url[0]) && $url[0] != '') {
-        $action = $url[0] . 'Action';
+        $actionName = $url[0];
+        $action = $actionName . 'Action';
+      }
+
+      $currentUser = Users::getCurrentUser();
+      if(!$currentUser->hasAccess($controllerName, $actionName)) {
+        header('Location: ' . PROOT . 'auth/accessDenied');
+        die();
       }
 
       array_shift($url);
