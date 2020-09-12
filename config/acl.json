@@ -2,16 +2,17 @@
   "guest":
   {
     "Home": "index",
-    "Auth": ["login", "logout", "register", "accessDenied"]
+    "Auth": ["login", "logout", "register", "accessDenied"],
+    "Products": "ajax"
   },
   "user":
   {
-    "Products": ["index", "add", "delete"],
+    "Products": ["index", "add", "delete", "ajax"],
     "Components": "index"
   },
   "admin":
   {
-    "Products": ["index", "add", "delete"],
+    "Products": ["index", "add", "delete", "ajax"],
     "Components": ["index", "add", "delete"]
   }
 }

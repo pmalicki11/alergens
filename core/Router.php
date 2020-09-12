@@ -22,10 +22,12 @@
       }
 
       $currentUser = Users::getCurrentUser();
+      /*
       if(!$currentUser->hasAccess($controllerName, $actionName)) {
         header('Location: ' . PROOT . 'auth/accessDenied');
         die();
       }
+      */
 
       array_shift($url);
       $params = $url;

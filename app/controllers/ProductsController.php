@@ -44,6 +44,8 @@
       $components = new Components();
       $result = array_column($components->getByNamePart($namePart), "name");
       $jsonOut = '';
+      header("Content-Type: application/json");
+      header("Access-Control-Allow-Origin: *");
       if(count($result) > 0) {
         $jsonOut .= '[';
         foreach ($result as $value) {

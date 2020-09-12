@@ -1,4 +1,3 @@
-
 var chosenContainer;
 var chosenSearchInput;
 var chosenOptions;
@@ -47,6 +46,7 @@ function getComponents() {
 }
 
 function fillDropdown(array) {
+
   chosenOptions.innerHTML = "";
   for(var item of array) {
     if(!choicesAry.includes(item)) {
@@ -66,7 +66,7 @@ function addToChoices(str) {
 
   var span = document.createElement("span");
   span.appendChild(document.createTextNode(str));
-  
+
   var li = document.createElement("li");
   li.setAttribute("class", "search-choice");
   li.appendChild(span);

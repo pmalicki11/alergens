@@ -1,7 +1,7 @@
 <?php $this->setSiteTitle('Products');?>
 
 <?php $this->start('head');?>
-<script src="<?=PROOT?>js/products.js"></script>
+
 <?php $this->end();?>
 
 <?php $this->start('body');?>
@@ -76,4 +76,6 @@
     </tr>
   </table>
 </form>
+
+<script src="<?=PROOT?>js/products.js"></script>
 <?php $this->end();?>
